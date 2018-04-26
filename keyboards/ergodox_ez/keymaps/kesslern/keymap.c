@@ -47,11 +47,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_GRV,   DV_1,    DV_2,    DV_3,   DV_4,    DV_5, KC_NO,
-        KC_TILD,  DV_QUOT, DV_COMM, DV_DOT, DV_P,    DV_Y, DV_BSLS,
-        KC_TAB,   DV_A,    DV_O,    KC_E,   SH_DV_U, SYM_I,
-        KC_LSFT,  DV_SCLN, DV_Q,    DV_J,   DV_K,    DV_X, KC_NO,
-        TO(SYMB), KC_NO,   KC_NO,   KC_NO,  KC_NO,
+        KC_GRV,   DV_1,    DV_2,    DV_3,   DV_4,    DV_5,  KC_ESC,
+        KC_TILD,  DV_QUOT, DV_COMM, DV_DOT, DV_P,    DV_Y,  DV_BSLS,
+        KC_TAB,   DV_A,    DV_O,    DV_E,   SH_DV_U, SYM_I,
+        KC_LSFT,  DV_SCLN, DV_Q,    DV_J,   DV_K,    DV_X,  KC_NO,
+        MO(SYMB), KC_NO,   KC_NO,   KC_NO,  KC_NO,
                                               KC_HOME,  KC_END,
                                                         KC_PGUP,
                          CTL_T(KC_BSPC), ALT_T(KC_DEL), GUI_T(KC_PGDN),
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_SLSH, DV_F,    DV_G,  DV_C,  DV_R,  DV_L,  DV_SLSH,
              SYM_D,   SH_DV_H, DV_T,  DV_N,  DV_S,  DV_MINS,
              DV_EQL,  DV_B,    DV_M,  DV_W,  DV_V,  DV_Z,  KC_RSFT,
-                            KC_NO, KC_NO, KC_NO, KC_NO, TO(SYMB),
+                            KC_NO, KC_NO, KC_NO, KC_NO, MO(SYMB),
              KC_LEFT, KC_RGHT,
              KC_UP,
              GUI_T(KC_DOWN), ALT_T(KC_ENT), CTL_T(KC_SPC)
@@ -89,19 +89,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // SYMBOLS
 [SYMB] = LAYOUT_ergodox(
        // left hand
-       KC_NO,   KC_F1, KC_F2, KC_F3,  KC_F4,   KC_F5,  RESET,
-       KC_NO,   KC_NO, KC_NO, KC_ASTR,KC_HASH, KC_PIPE,KC_NO,
-       KC_NO,   KC_NO, KC_NO, KC_AT,  KC_PERC, KC_TILD,
-       KC_NO,   KC_NO, KC_NO, KC_DLR, KC_CIRC, KC_GRV,KC_NO,
-       KC_TRNS, KC_NO, KC_NO, KC_TRNS,KC_TRNS,
-                                       KC_TRNS,KC_TRNS,
-                                               KC_TRNS,
-                               KC_TRNS,KC_TRNS,KC_TRNS,
+       KC_ESC,  KC_F1, KC_F2, KC_F3,   KC_F4,   KC_F5,   RESET,
+       KC_NO,   KC_NO, KC_NO, KC_ASTR, KC_HASH, KC_PIPE, KC_NO,
+       KC_NO,   KC_NO, KC_NO, KC_AT,   KC_PERC, KC_TRNS,
+       KC_TRNS, KC_NO, KC_NO, KC_DLR,  KC_CIRC, KC_GRV,  KC_NO,
+       KC_TRNS, KC_NO, KC_NO, KC_TRNS, KC_TRNS,
+                                                KC_TRNS, KC_TRNS,
+                                                         KC_TRNS,
+                           CTL_T(KC_SPC), ALT_T(KC_ENT), KC_TRNS,
        // right hand
        KC_TRNS, KC_F6,   KC_F7,   KC_F8,   KC_F9, KC_F10, KC_F11,
        KC_TRNS, DV_QUES, KC_LPRN, KC_RPRN, KC_NO, KC_NO,  KC_F12,
-                KC_PLUS, DV_LCBR, DV_RCBR, KC_NO, KC_NO,  KC_NO,
-       KC_TRNS, KC_EQL,  DV_LBRC, DV_RBRC, KC_NO, KC_NO,  KC_NO,
+                KC_TRNS, DV_LCBR, DV_RCBR, KC_NO, KC_NO,  KC_NO,
+       KC_TRNS, KC_EQL,  DV_LBRC, DV_RBRC, KC_NO, KC_NO,  KC_TRNS,
                          KC_NO,   KC_NO,   KC_NO, KC_NO,  KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
