@@ -27,8 +27,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                MO(1),   KC_LGUI, KC_LALT,               KC_SPC,           KC_LEFT, KC_UP,  KC_DOWN, KC_RGHT
                 ),
   [AUX] = KEYMAP(
-               KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, KC_F6,   KC_F7,   KC_F8,   KC_F9,     KC_F10,  KC_F11, KC_F12, RESET, \
-               KC_TRNS, KC_NO,   KC_MPRV, KC_MNXT, KC_VOLU, KC_NO, KC_HOME, KC_PGUP, KC_UP,   KC_PGDOWN, KC_NO,   KC_NO,  KC_NO,  KC_NO, \
+               KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, KC_F6,   KC_F7,   KC_F8,   KC_F9,     KC_F10,  KC_F11, KC_F12, KC_DEL, \
+               KC_TRNS, KC_NO,   KC_MPRV, KC_MNXT, KC_VOLU, KC_NO, KC_HOME, KC_PGUP, KC_UP,   KC_PGDOWN, KC_NO,   KC_NO,  KC_NO,  RESET, \
                KC_TRNS, KC_NO,   KC_NO,   KC_MPLY, KC_VOLD, KC_NO, KC_END,  KC_LEFT, KC_DOWN, KC_RIGHT,  KC_NO,   KC_NO,  KC_NO, \
                KC_TRNS, KC_NO,   KC_NO,   KC_NO,   KC_MUTE, KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,     KC_NO,   KC_TRNS, \
                KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS,                 KC_TRNS, KC_TRNS,   KC_TRNS, KC_TRNS
