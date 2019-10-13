@@ -56,8 +56,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* COL2ROW, ROW2COL*/
 #define DIODE_DIRECTION COL2ROW
 #define NO_USB_STARTUP_CHECK
+#define TAPPING_TERM_PER_KEY
 
-// #define F_SCL 100000L
+#define DISABLE_SPACE_CADET_ROLLOVER
+#define TAPPING_TOGGLE  1
+#define TAPPING_TERM 200
+#define IGNORE_MOD_TAP_INTERRUPT // this makes it possible to do rolling combos (zx) with keys that convert to other keys on hold (z becomes ctrl when you hold it, and when this option isn't enabled, z rapidly followed by x actually sends Ctrl-x. That's bad.)
+
 #define MASTER_RIGHT
 #define USE_I2C
 // #define SOFT_SERIAL_PIN E6
