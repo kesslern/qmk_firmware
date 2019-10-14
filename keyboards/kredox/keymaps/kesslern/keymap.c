@@ -49,12 +49,22 @@
 #define CT_SPC  CTL_T(KC_SPC)
 #define WN_DOWN GUI_T(KC_DOWN)
 
+#define MACRO_1 DYN_MACRO_PLAY1
+#define MACRO_2 DYN_MACRO_PLAY2
+
+#define RCMAC_1 DYN_REC_START1
+#define RCMAC_2 DYN_REC_START2
+  
+#define RCSTOP DYN_REC_STOP
 
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
     KC_MAKE = SAFE_RANGE,
-    KC_FLSH                  
+    KC_FLSH,
+    DYNAMIC_MACRO_RANGE
 };
+
+#include "dynamic_macro.h"
 
 /*
         Template for a layer of the keymap. Copy/paste and customize.
@@ -76,20 +86,19 @@ enum custom_keycodes {
 
 */
 
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         [BASE] = LAYOUT(
               // XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
                  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_ESC,
                  KC_TILD, DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    DV_BSLS,
                  KC_TAB,  DV_A,    DV_O,    NAV_E,   SH_DV_U, SYM_I,
-                 KC_LSFT, DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,    XXXXXXX, KC_H,
+                 KC_LSFT, DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,    MACRO_1, MACRO_2,
                  MO(SYMB),KC_MPLY, KC_VOLD, KC_VOLU,    WN_UP,         CT_BSPC, AL_DEL,
 
                           KC_PSCR, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
                           DV_EQL,  DV_F,    DV_G,    DV_C,    DV_R,    DV_L,    DV_SLSH,
                                    SYM_D,   SH_DV_H, DV_T,    DV_N,    DV_S,    DV_MINS,
-                 KC_A,    DV_E,    DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,    KC_RSFT,
+                 RCSTOP,  XXXXXXX, DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,    KC_RSFT,
                  AL_ENT,  CT_SPC,     WN_DOWN,       TO(NAV), XXXXXXX, XXXXXXX, MO(SYMB)
         ),
         [SYMB] = LAYOUT(
@@ -97,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_INS,
                  KC_NO,   KC_NO,   KC_EXLM, KC_AT,   KC_HASH, KC_NO,   KC_SLSH,
                  KC_NO,   KC_NO,   KC_DLR,  KC_PERC, KC_PIPE, KC_TRNS,
-                 KC_TRNS, KC_NO,   KC_CIRC, KC_AMPR, KC_ASTR, KC_NO,   KC_NO,   KC_NO,
+                 KC_TRNS, KC_NO,   KC_CIRC, KC_AMPR, KC_ASTR, KC_NO,   RCMAC_1, RCMAC_2,
                  KC_TRNS, KC_NO,   KC_NO,   KC_NO,      KC_LEFT,       KC_SPC,  KC_BSPC,
 
                           KC_NO,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
@@ -123,6 +132,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_dynamic_macro(keycode, record)) {
+        return false;
+    }
+
    switch (keycode) {
     case KC_MAKE:
       if (record->event.pressed) {
