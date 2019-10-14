@@ -15,6 +15,7 @@
  */
 #include QMK_KEYBOARD_H
 #include "keymap_dvorak.h"
+#include <sendstring_dvorak.h>
 
 #define BASE 0
 #define SYMB 1
@@ -50,7 +51,11 @@
 
 
 // Defines the keycodes used by our macros in process_record_user
-enum custom_keycodes { NONE };
+enum custom_keycodes {
+    KC_MAKE = SAFE_RANGE,
+    KC_FLSH                  
+};
+
 /*
         Template for a layer of the keymap. Copy/paste and customize.
 
@@ -103,22 +108,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
         [NAV] = LAYOUT(
               // XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
-                 RESET,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                 KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                  KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_NO,   
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,         KC_NO,   KC_NO,
 
-                          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                          RESET,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                           KC_NO,   KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_NO,   KC_NO,
                                    KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO,   KC_NO,
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
-                 KC_NO,   KC_NO,      KC_NO,         KC_NO,   KC_NO,   KC_NO,   KC_NO
+                 KC_NO,   KC_NO,      KC_NO,         TO(BASE),KC_NO,   KC_MAKE, KC_FLSH
         ),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    return true;
+   switch (keycode) {
+    case KC_MAKE:
+      if (record->event.pressed) {
+        SEND_STRING("make kredox:kesslern"SS_TAP(X_ENTER));
+      }
+      break;
+   case KC_FLSH:
+      if (record->event.pressed) {
+        SEND_STRING("sleep 2s && sudo teensy-loader-cli -mmcu=atmega32u4 kredox_kesslern.hex"SS_TAP(X_ENTER));
+        reset_keyboard();
+        
+      }
+      break;
+   }
+  
+  return true;
 }
 
 void matrix_init_user(void) {}
