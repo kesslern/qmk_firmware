@@ -14,10 +14,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include "keymap_dvorak.h"
+#include <sendstring_dvorak.h>
+
+
 
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
-    _BASE
+                  _BASE,
+                  _NUMFN,
+                  _BETA,
+                  _NAV
 };
 
 // Defines the keycodes used by our macros in process_record_user
@@ -26,18 +33,54 @@ enum custom_keycodes {
     QMKURL
 };
 
+// Shift keys on the home row
+#define SH_DV_U SFT_T(DV_U)
+#define SH_DV_H SFT_T(DV_H)
+#define SH_DV_A SFT_T(DV_A)
+#define SH_DV_S SFT_T(DV_S)
+
+#define CTLBSPC CTL_T(KC_BSPC)
+#define ALT_DEL ALT_T(KC_DEL)
+#define WINSLSH WIN_T(DV_SLSH)
+
+#define TABBETA LT(_BETA, KC_TAB)
+#define ENTRF09 LT(_NUMFN, KC_ENT)
+#define SH_SPC  SFT_T(KC_SPC)
+
+#define NAV_E   LT(_NAV, DV_E)
+
+#define BETA_K  LT(_BETA, DV_K)
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
     [_BASE] = LAYOUT(
-                     KC_Q, KC_W, KC_E, KC_R, KC_T,   KC_Y, KC_U, KC_I,    KC_O,   KC_P, \
-                     KC_A, KC_S, KC_D, KC_F, KC_G,   KC_H, KC_J, KC_K,    KC_L,   KC_SCLN, \
-                     KC_Z, KC_X, KC_C, KC_V, KC_B,   KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, \
-                                 KC_BSPC, KC_LCTL, KC_LALT,   KC_RGUI, KC_ENT, KC_SPC              \
-    )
+                     DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    DV_F,    DV_G,    DV_C,    DV_R,    DV_L,    \
+                     SH_DV_A, DV_O,    NAV_E,   SH_DV_U, DV_I,    DV_D,    SH_DV_H, DV_T,    DV_N,    SH_DV_S, \
+                     DV_SCLN, DV_Q,    DV_J,    BETA_K,  DV_X,    DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,    \
+                                       CTLBSPC, ALT_DEL, WINSLSH, TABBETA, ENTRF09, SH_SPC                     \
+                     ),
+    [_NUMFN] = LAYOUT(
+                     DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    DV_6,    DV_7,    DV_8,    DV_9,    DV_0,    \
+                     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_F11,  KC_F12,  DV_W,    DV_V,    DV_Z,    \
+                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
+                     ),
+    [_BETA] = LAYOUT(
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_QUES, KC_LPRN, KC_RPRN, KC_TILD, KC_PIPE, \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_SLSH, DV_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, KC_PLUS, KC_EQL,  \
+                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
+                     ),
+    [_NAV] = LAYOUT(
+                     KC_NO,   KC_NO,   KC_PGUP, KC_HOME, KC_UP,   KC_END,   KC_NO,   KC_NO,  KC_NO,   KC_NO,   \
+                     KC_NO,   KC_NO,   KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,   KC_NO,  KC_NO,   KC_NO,   \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,  KC_NO,   KC_NO,   \
+                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS                   \
+                     )
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
+  switch (keycode) {
         case QMKBEST:
             if (record->event.pressed) {
                 // when keycode QMKBEST is pressed
