@@ -17,8 +17,6 @@
 #include "keymap_dvorak.h"
 #include <sendstring_dvorak.h>
 
-
-
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
                   _BASE,
@@ -38,6 +36,8 @@ enum custom_keycodes {
 #define SH_DV_H SFT_T(DV_H)
 #define SH_DV_A SFT_T(DV_A)
 #define SH_DV_S SFT_T(DV_S)
+#define SH_F4 SFT_T(KC_F4)
+#define SH_F7 SFT_T(KC_F7)
 
 #define CTLBSPC CTL_T(KC_BSPC)
 #define ALT_DEL ALT_T(KC_DEL)
@@ -61,20 +61,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                      ),
     [_NUMFN] = LAYOUT(
                      DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    DV_6,    DV_7,    DV_8,    DV_9,    DV_0,    \
-                     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  \
+                     KC_F1,   KC_F2,   KC_F3,   SH_F4,   KC_F5,   KC_F6,   SH_F7,   KC_F8,   KC_F9,   KC_F10,  \
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_F11,  KC_F12,  DV_W,    DV_V,    DV_Z,    \
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
                      ),
     [_BETA] = LAYOUT(
-                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_QUES, KC_LPRN, KC_RPRN, KC_TILD, KC_PIPE, \
-                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_SLSH, DV_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
-                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, KC_PLUS, KC_EQL,  \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_EQL,  KC_LPRN, KC_RPRN, KC_TILD, KC_PIPE, \
+                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   DV_PLUS, DV_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, DV_PLUS, DV_EQL,  \
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
                      ),
     [_NAV] = LAYOUT(
-                     KC_NO,   KC_NO,   KC_PGUP, KC_HOME, KC_UP,   KC_END,   KC_NO,   KC_NO,  KC_NO,   KC_NO,   \
-                     KC_NO,   KC_NO,   KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,   KC_NO,  KC_NO,   KC_NO,   \
-                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,  KC_NO,   KC_NO,   \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PGUP, KC_HOME, KC_UP,   KC_END,   KC_NO,  \
+                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,  \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,  KC_NO,    KC_NO,  \
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS                   \
                      )
 };
