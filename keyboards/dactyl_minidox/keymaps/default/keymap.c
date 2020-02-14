@@ -36,8 +36,9 @@ enum custom_keycodes {
 #define SH_DV_H SFT_T(DV_H)
 #define SH_DV_A SFT_T(DV_A)
 #define SH_DV_S SFT_T(DV_S)
-#define SH_F4 SFT_T(KC_F4)
-#define SH_F7 SFT_T(KC_F7)
+#define SH_F4   SFT_T(KC_F4)
+#define SH_F7   SFT_T(KC_F7)
+#define SH_LCBR SFT_T(DV_LCBR)
 
 #define CTLBSPC CTL_T(KC_BSPC)
 #define ALT_DEL ALT_T(KC_DEL)
@@ -67,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                      ),
     [_BETA] = LAYOUT(
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_EQL,  KC_LPRN, KC_RPRN, KC_TILD, KC_PIPE, \
-                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   DV_PLUS, DV_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
+                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   DV_PLUS, SH_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, DV_PLUS, DV_EQL,  \
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
                      ),
