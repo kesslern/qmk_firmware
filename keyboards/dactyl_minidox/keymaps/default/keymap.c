@@ -46,6 +46,8 @@ enum custom_keycodes {
 
 #define TABBETA LT(_BETA, KC_TAB)
 #define ENTRF09 LT(_NUMFN, KC_ENT)
+#define I_F09   LT(_NUMFN, DV_I)
+#define D_F09   LT(_NUMFN, DV_D)
 #define SH_SPC  SFT_T(KC_SPC)
 
 #define NAV_E   LT(_NAV, DV_E)
@@ -56,7 +58,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
     [_BASE] = LAYOUT(
                      DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    DV_F,    DV_G,    DV_C,    DV_R,    DV_L,    \
-                     SH_DV_A, DV_O,    NAV_E,   SH_DV_U, DV_I,    DV_D,    SH_DV_H, DV_T,    DV_N,    SH_DV_S, \
+                     SH_DV_A, DV_O,    NAV_E,   SH_DV_U, I_F09,   D_F09,   SH_DV_H, DV_T,    DV_N,    SH_DV_S, \
                      DV_SCLN, DV_Q,    DV_J,    BETA_K,  DV_X,    DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,    \
                                        CTLBSPC, ALT_DEL, WINSLSH, TABBETA, ENTRF09, SH_SPC                     \
                      ),
@@ -68,15 +70,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                      ),
     [_BETA] = LAYOUT(
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_EQL,  KC_LPRN, KC_RPRN, KC_TILD, KC_PIPE, \
-                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   DV_PLUS, SH_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
+                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, DV_PLUS, SH_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, DV_PLUS, DV_EQL,  \
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
                      ),
     [_NAV] = LAYOUT(
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PGUP, KC_HOME, KC_UP,   KC_END,   KC_NO,  \
-                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_NO,   KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,  \
-                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,  KC_NO,    KC_NO,  \
-                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS, KC_TRNS                   \
+                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,  \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,    KC_NO,  \
+                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                   \
                      )
 };
 
