@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BETA] = LAYOUT(
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_EQL,  KC_LPRN, KC_RPRN, KC_TILD, KC_PIPE, \
                      KC_TRNS, KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, DV_PLUS, SH_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
-                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, DV_PLUS, DV_EQL,  \
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, DV_SLSH, DV_EQL,  \
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
                      ),
     [_NAV] = LAYOUT(
