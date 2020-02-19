@@ -70,15 +70,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                      ),
     [_BETA] = LAYOUT(
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   DV_EQL,  KC_LPRN, KC_RPRN, KC_TILD, KC_PIPE, \
-                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, DV_PLUS, SH_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
+                     KC_TRNS, KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, DV_PLUS, SH_LCBR, DV_RCBR, DV_MINS, DV_UNDS, \
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_ESC,  KC_BSLS, DV_LBRC, DV_RBRC, DV_PLUS, DV_EQL,  \
                                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
                      ),
     [_NAV] = LAYOUT(
                      KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_PGUP, KC_HOME, KC_UP,   KC_END,   KC_NO,  \
-                     KC_NO,   KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_NO,  \
-                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,    KC_NO,  \
-                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                   \
+                     KC_TRNS, KC_NO,   KC_NO,   KC_TRNS, KC_TRNS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_TRNS,\
+                     KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,  \
+                                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS                    \
                      )
 };
 
