@@ -38,6 +38,10 @@
 #define ALT_DEL ALT_T(KC_DEL)
 #define ALT_ENT ALT_T(KC_ENT)
 
+// GUI tap/hold
+#define WIN_UP  GUI_T(KC_UP)
+#define WINRGHT GUI_T(KC_RIGHT)
+
 #define MACRO_1 DYN_MACRO_PLAY1
 #define MACRO_2 DYN_MACRO_PLAY2
 
@@ -56,11 +60,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     KC_GRV , KC_1   , KC_2   , KC_3   , KC_4   , KC_5   ,          KC_6   , KC_7   , KC_8   , KC_9   , KC_0   , KC_ESC ,
     KC_TILD, DV_QUOT, DV_COMM, DV_DOT , DV_P   , DV_Y   ,          DV_F   , DV_G   , DV_C   , DV_R   , DV_L   , DV_SLSH,
-    KC_TAB , SH_DV_A, DV_O   , NAV_E  , SH_DV_U, DV_I   ,          DV_D   , SH_DV_H, DV_T   , DV_N   , SH_DV_S, DV_MINS,
+    KC_TAB , SH_DV_A, DV_O   , NAV_E  , SH_DV_U, SYM_I  ,          SYM_D  , SH_DV_H, DV_T   , DV_N   , SH_DV_S, DV_MINS,
     KC_LSFT, DV_SCLN, DV_Q   , DV_J   , DV_K   , DV_X   ,          DV_B   , DV_M   , DV_W   , DV_V   , DV_Z   , KC_RSFT,
                                         KC_MPLY, SH_CT_C,          XXXXXXX, XXXXXXX,
                                         CT_BSPC, ALT_DEL,          ALT_ENT, CT_SPC ,
-                                        KC_DOWN, KC_UP  ,          KC_RGHT, KC_LEFT,
+                                        KC_DOWN, WIN_UP  ,         WINRGHT, KC_LEFT,
                                         MO_UTIL, KC_LSFT,          KC_RSFT, MO_SYM
   ),
 
@@ -68,9 +72,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     KC_ESC , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,          KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-    _______, _______, _______, KC_EXLM, KC_AT  , KC_HASH,          DV_EQL , KC_LPRN, KC_RPRN, KC_SLSH, _______, KC_F12 ,
-    _______, _______, _______, KC_DLR , KC_PERC, _______,          KC_RPRN, KC_LCBR, KC_RCBR, KC_BSLS, KC_PIPE, _______,
-    _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR,          DV_PLUS, KC_LBRC, KC_RBRC, KC_QUES, _______, _______,
+    _______, _______, _______, KC_EXLM, KC_AT  , KC_HASH,          DV_EQL , KC_LPRN, KC_RPRN, DV_SLSH, _______, KC_F12 ,
+    _______, _______, _______, KC_DLR , KC_PERC, _______,          _______, DV_LCBR, DV_RCBR, KC_BSLS, KC_PIPE, _______,
+    _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR,          DV_PLUS, DV_LBRC, DV_RBRC, DV_QUES, _______, _______,
                                         _______, SH_CT_V,          _______, _______,
                                         _______, _______,          _______, _______,
                                         _______, _______,          _______, _______,
