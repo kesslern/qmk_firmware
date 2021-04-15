@@ -17,15 +17,14 @@
  */
 #include QMK_KEYBOARD_H
 
-// safe range starts at `PLOOPY_SAFE_RANGE` instead.
+#define PLOOPY_DPI_OPTIONS { 500, 600, 700 }
+#define PLOOPY_DPI_DEFAULT 1
+#define OPT_THRES 175  // (0-1024) 	Threshold for actication
+#define OPT_SCALE 2  // Multiplier for wheel
 
+// safe range starts at `PLOOPY_SAFE_RANGE` instead.
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT( /* Base */
-	       KC_BTN1, KC_BTN3, KC_BTN2,
-	       MO(1), KC_NO
-		),
-  [1] = LAYOUT(
-	       KC_BTN4, KC_NO, KC_BTN5,
-	       KC_TRNS, DPI_CONFIG
-		 ),
-};
+  [0] = LAYOUT(/* Base */
+  KC_BTN1, KC_BTN3, KC_BTN2, DRAG_SCROLL, _______)};
+
+extern uint16_t dpi_array[];

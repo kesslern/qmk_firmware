@@ -50,6 +50,7 @@
 
 enum custom_keycodes {
   KC_MAKE = SAFE_RANGE, // can always be here
+  EQLRBRC,
   L_FLASH,
   R_FLASH,
 };
@@ -72,8 +73,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 //  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
     KC_ESC , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_F5  ,          KC_F6  , KC_F7  , KC_F8  , KC_F9  , KC_F10 , KC_F11 ,
-    _______, _______, _______, KC_EXLM, KC_AT  , KC_HASH,          DV_EQL , KC_LPRN, KC_RPRN, DV_SLSH, _______, KC_F12 ,
-    _______, _______, _______, KC_DLR , KC_PERC, _______,          _______, DV_LCBR, DV_RCBR, KC_BSLS, KC_PIPE, _______,
+    _______, _______, _______, KC_EXLM, KC_AT  , KC_HASH,          EQLRBRC, KC_LPRN, KC_RPRN, DV_SLSH, _______, KC_F12 ,
+    _______, _______, _______, KC_DLR , KC_PERC, _______,          DV_EQL , DV_LCBR, DV_RCBR, KC_BSLS, KC_PIPE, _______,
     _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR,          DV_PLUS, DV_LBRC, DV_RBRC, DV_QUES, _______, _______,
                                         _______, SH_CT_V,          _______, _______,
                                         _______, _______,          _______, _______,
@@ -111,6 +112,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_MAKE:
       if (record->event.pressed) {
         SEND_STRING("make handwired/dactyl_manuform/5x6:kesslern"SS_TAP(X_ENTER));
+      }
+      break;
+    case EQLRBRC:
+      if (record->event.pressed) {
+        SEND_STRING("=> ");
       }
       break;
    case L_FLASH:
