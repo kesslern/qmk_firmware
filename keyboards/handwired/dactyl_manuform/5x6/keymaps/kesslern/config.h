@@ -1,0 +1,15 @@
+/* Copyright 2022 Nathan Kessler <nathant93@gmail.com> */
+
+#pragma once
+
+#define EE_HANDS
+#define SPLIT_USB_DETECT
+#define SPLIT_USB_TIMEOUT 2500
+#define TAPPING_TERM 200
+
+#define BOOTMAGIC_ROW_RIGHT 5
+#define BOOTMAGIC_COLUMN_RIGHT 6
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+
+#define CHORDAL_HOLD
