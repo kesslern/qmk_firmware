@@ -27,22 +27,23 @@ enum layers {
 #define HM_N    RGUI_T(DV_N)
 #define HM_S    RCTL_T(DV_S)
 
-// Thumbs (left -> right): Bspc SYM Tab Esc Enter Space. Every key is
+// Thumbs (left -> right): Bspc Tab / Esc Enter Space. Every key is
 // dual-function (tap / hold), no bare keys. NAV and SYM each sit on an inner
 // and a mid thumb, so NAV+SYM -> _FN (tri-layer) is a comfortable inner-thumb
 // chord. Outer thumbs add a Shift to take load off the pinky home-row shift.
 //
-// The left inner thumb used to tap Del; Del is rarely used, so its tap now
-// fires a one-shot SYM layer instead (handled in process_record_user), while
-// its hold still holds SYM momentarily -- the latter is load-bearing as the
-// left half of the SYM+NAV->_FN tri-layer chord. Delete itself now lives on
-// the Bspc position of the _SYM layer.
-#define BSP_SFT LSFT_T(KC_BSPC)   // tap Bspc / hold Shift
-#define SYM_OSL LT(_SYM, KC_DEL)  // tap one-shot SYM / hold SYM (tap -> OSL in process_record_user)
-#define TAB_NAV LT(_NAV, KC_TAB)  // tap Tab   / hold NAV
-#define ESC_NAV LT(_NAV, KC_ESC)  // tap Esc   / hold NAV
-#define ENT_SYM LT(_SYM, KC_ENT)  // tap Enter / hold SYM
-#define SPC_SFT RSFT_T(KC_SPC)    // tap Space / hold Shift
+// The left mid thumb used to tap Del, then a one-shot SYM layer; it now taps
+// Tab instead (moved off the inner thumb below), while its hold still holds
+// SYM momentarily -- that hold is load-bearing as the left half of the
+// SYM+NAV->_FN tri-layer chord. Delete itself lives on the Bspc position of
+// the _SYM layer. The left inner thumb, freed of its old Tab tap, now taps /
+// instead -- its hold is still NAV.
+#define BSP_SFT LSFT_T(KC_BSPC)    // tap Bspc  / hold Shift
+#define TAB_SYM LT(_SYM, KC_TAB)   // tap Tab   / hold SYM
+#define SLS_NAV LT(_NAV, DV_SLSH)  // tap /     / hold NAV
+#define ESC_NAV LT(_NAV, KC_ESC)   // tap Esc   / hold NAV
+#define ENT_SYM LT(_SYM, KC_ENT)   // tap Enter / hold SYM
+#define SPC_SFT RSFT_T(KC_SPC)     // tap Space / hold Shift
 
 // _SYM left outer thumb: tap Delete (the old inner-thumb Del), hold Shift. The
 // hold restores the left Shift that BSP_SFT provides on the base layer, so
@@ -55,18 +56,19 @@ enum layers {
 // = mod. The bottom row has no mods, so those symbols are plain keys below.
 //
 // Mod-tap can only store an 8-bit *basic* keycode on its tap, so shifted symbols
-// (~ and both |) can't ride a mod-tap directly: their defines wrap the mod over
-// the underlying basic key and emit the real shifted symbol on tap in
-// process_record_user (same override trick as SYM_OSL). Basic symbols use plain
-// mod-taps; plain (non-mod) keys can hold shifted keycodes directly.
+// (~, ( ), | on the right, and { }) can't ride a mod-tap directly: their defines
+// wrap the mod over an underlying basic key (its shifted counterpart, where one
+// exists) and emit the real shifted symbol on tap in process_record_user. Basic
+// symbols use plain mod-taps; plain (non-mod) keys can hold shifted keycodes
+// directly.
 #define SM_GRV  LCTL_T(DV_GRV)   // left pinky:  tap ` / hold LCTL
 #define SM_TILD LGUI_T(DV_GRV)   // left home:   tap ~ (tap override) / hold LGUI
-#define SM_PIPE LALT_T(DV_BSLS)  // left home:   tap | (tap override) / hold LALT
-#define SM_SLSH LCTL_T(DV_SLSH)  // left home:   tap / / hold LCTL
+#define SM_LPRN LALT_T(DV_9)     // left home:   tap ( (tap override) / hold LALT
+#define SM_RPRN LCTL_T(DV_0)     // left home:   tap ) (tap override) / hold LCTL
 #define SM_MINS LSFT_T(DV_MINS)  // left home:   tap - / hold LSFT
 #define SM_EQL  RSFT_T(DV_EQL)   // right home:  tap = / hold RSFT
-#define SM_LBRC RCTL_T(DV_LBRC)  // right home:  tap [ / hold RCTL
-#define SM_RBRC RALT_T(DV_RBRC)  // right home:  tap ] / hold RALT
+#define SM_LCBR RCTL_T(DV_LBRC)  // right home:  tap { (tap override) / hold RCTL
+#define SM_RCBR RALT_T(DV_RBRC)  // right home:  tap } (tap override) / hold RALT
 #define SM_RPIP RGUI_T(DV_BSLS)  // right home:  tap | (tap override) / hold RGUI
 #define SM_RMIN RCTL_T(DV_MINS)  // right pinky: tap - / hold RCTL
 
@@ -77,23 +79,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         DV_QUOT, DV_COMM, DV_DOT,  DV_P,    DV_Y,    DV_F,    DV_G,    DV_C,    DV_R,    DV_L,
         HM_A,    HM_O,    HM_E,    HM_U,    HM_I,    HM_D,    HM_H,    HM_T,    HM_N,    HM_S,
         DV_SCLN, DV_Q,    DV_J,    DV_K,    DV_X,    DV_B,    DV_M,    DV_W,    DV_V,    DV_Z,
-                          BSP_SFT, SYM_OSL, TAB_NAV, ESC_NAV, ENT_SYM, SPC_SFT
+                          BSP_SFT, TAB_SYM, SLS_NAV, ESC_NAV, ENT_SYM, SPC_SFT
     ),
 
-    // Symbols + numbers. Held via either thumb (SYM) or entered for one keypress
-    // by tapping SYM_OSL. Number row on top. Symbols sit on the home row (moved
+    // Symbols + numbers. Held via either thumb (SYM). Number row on top. Symbols sit on the home row (moved
     // up from the bottom row for easier reach) as SM_* mod-taps: tap = symbol,
     // hold = that finger's base mod (GACS + inner-index Shift preserved), so a
-    // modified symbol needs no press order. The right hand carries a second set
+    // modified symbol needs no press order. { and } ride the same two home-row
+    // fingers as [ and ] used to (tap override, like ~), swapped down to the
+    // bottom row as plain keys -- braces get the easier reach since they're used
+    // more often than brackets. ( and ) ride the middle/index fingers (tap
+    // override, like { }), duplicating the same two symbols already on the left
+    // bottom row -- easier-reach parens are worth the duplication since they're
+    // used far more than brackets or braces. The right hand carries a second set
     // of symbols on its bottom row as plain keys (no mods there); the left
-    // bottom row stays transparent. The old shifted-number symbols (!@#$%^&*())
-    // are gone -- type them as Shift+number. Shift is also on both thumbs
-    // (DEL_SFT hold + SPC_SFT passthrough); the left outer thumb taps Delete, so
-    // a tap of SYM_OSL then that thumb gives Delete.
+    // bottom row is mostly transparent except for that ( ) pair on the
+    // ring/middle fingers, mirroring [ ] on the right. The old shifted-number
+    // symbols (!@#$%^&*()) are gone -- type them as Shift+number, except ( )
+    // which now have dedicated spots. Shift is also on both thumbs (DEL_SFT
+    // hold + SPC_SFT passthrough); the left outer thumb taps Delete, so holding
+    // TAB_SYM for SYM then tapping that thumb gives Delete.
     [_SYM] = LAYOUT_split_3x5_3(
         DV_1,    DV_2,    DV_3,    DV_4,    DV_5,    DV_6,    DV_7,    DV_8,    DV_9,    DV_0,
-        SM_GRV,  SM_TILD, SM_PIPE, SM_SLSH, SM_MINS, SM_EQL,  SM_LBRC, SM_RBRC, SM_RPIP, SM_RMIN,
-        _______, _______, _______, _______, _______, DV_PLUS, DV_LCBR, DV_RCBR, DV_QUES, DV_SLSH,
+        SM_GRV,  SM_TILD, SM_LPRN, SM_RPRN, SM_MINS, SM_EQL,  SM_LCBR, SM_RCBR, SM_RPIP, SM_RMIN,
+        _______, DV_LPRN, DV_RPRN, DV_BSLS, DV_UNDS, DV_PLUS, DV_LBRC, DV_RBRC, DV_QUES, DV_UNDS,
                           DEL_SFT, _______, _______, _______, _______, _______
     ),
 
@@ -104,13 +113,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // are plain (non-tap) mods once NAV is held, any combination of them can be
     // chorded reliably -- combined with the Tab key on the ring finger (which
     // is never needed for a mod alongside Tab), this gives left-hand-only
-    // Ctrl/Alt/Shift+Tab: hold TAB_NAV, hold index/middle/pinky for the mod(s)
+    // Ctrl/Alt/Shift+Tab: hold SLS_NAV, hold index/middle/pinky for the mod(s)
     // you want, tap ring. (Ctrl+Tab and Alt+Tab alone are simpler: just hold
-    // HM_U/HM_E from the base layer and tap TAB_NAV.)
+    // HM_U/HM_E from the base layer and tap TAB_SYM.)
     [_NAV] = LAYOUT_split_3x5_3(
         _______, KC_TAB,  KC_MPRV, KC_MPLY, KC_MNXT, KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,
         KC_LSFT, KC_LGUI, KC_LALT, KC_LCTL, KC_MUTE, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_INS,
-        KC_VOLD, KC_VOLU, _______, DV_BSLS, DV_UNDS, KC_TAB,  KC_ESC,  KC_CAPS, _______, KC_PSCR,
+        KC_VOLD, KC_VOLU, _______, _______, _______, KC_TAB,  KC_ESC,  KC_CAPS, _______, KC_PSCR,
                           _______, _______, _______, _______, _______, _______
     ),
 
@@ -136,8 +145,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 static bool is_thumb_key(uint16_t keycode) {
     switch (keycode) {
         case BSP_SFT:
-        case SYM_OSL:
-        case TAB_NAV:
+        case TAB_SYM:
+        case SLS_NAV:
         case ESC_NAV:
         case ENT_SYM:
         case SPC_SFT:
@@ -156,8 +165,8 @@ static bool is_thumb_key(uint16_t keycode) {
 // word) capitalize the letter instead of producing a space.
 static bool is_layer_thumb_key(uint16_t keycode) {
     switch (keycode) {
-        case SYM_OSL:
-        case TAB_NAV:
+        case TAB_SYM:
+        case SLS_NAV:
         case ESC_NAV:
         case ENT_SYM:
             return true;
@@ -197,39 +206,20 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t* record) {
     return is_layer_thumb_key(keycode);
 }
 
-// Turn a *tap* of SYM_OSL into a one-shot SYM layer (next keypress lands on
-// _SYM, then it clears), instead of sending the LT's Del tap keycode. A *hold*
-// (tap.count == 0) is left untouched so the LT still holds SYM momentarily --
-// that hold is the left half of the SYM+NAV->_FN tri-layer chord. The two
-// set/clear calls mirror what QMK's core OSL keycode does on press/release.
-//
-// Also emit the shifted symbols ~ | (both hands' pipe) on the tap of their _SYM
+// Emit the shifted symbols ~ | (both hands' pipe) on the tap of their _SYM
 // home-row mod-taps: a mod-tap can only store an 8-bit basic keycode, so
 // tap_code16 sends the real shifted keycode here while the mod-tap's hold (the
 // modifier) is still handled natively -- keeping the full tapping-term / Chordal
 // Hold behavior on the hold.
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-    // Both the arm and disarm happen here, on release, rather than mirroring
-    // core's press-then-release split. If ONESHOT_START were set on press,
-    // returning false would make process_record() treat that same press as an
-    // "other key was pressed while one-shot is active" event (since the
-    // one-shot layer is already active by the time that check runs) and
-    // immediately clear ONESHOT_OTHER_KEY_PRESSED -- collapsing the one-shot
-    // before the thumb key is even released. Doing both calls on release
-    // sidesteps that: that check only fires on press events.
-    if (keycode == SYM_OSL && record->tap.count) {
-        if (!record->event.pressed) {
-            set_oneshot_layer(_SYM, ONESHOT_START);
-            clear_oneshot_layer_state(ONESHOT_PRESSED);
-        }
-        return false;
-    }
-
     if (record->tap.count && record->event.pressed) {
         switch (keycode) {
             case SM_TILD: tap_code16(DV_TILD); return false;
-            case SM_PIPE: tap_code16(DV_PIPE); return false;
+            case SM_LPRN: tap_code16(DV_LPRN); return false;
+            case SM_RPRN: tap_code16(DV_RPRN); return false;
             case SM_RPIP: tap_code16(DV_PIPE); return false;
+            case SM_LCBR: tap_code16(DV_LCBR); return false;
+            case SM_RCBR: tap_code16(DV_RCBR); return false;
         }
     }
     return true;

@@ -48,3 +48,24 @@
 // disables tap-then-hold auto-repeat on the thumb keys (hold Bspc to delete-
 // repeat, etc.).
 #define QUICK_TAP_TERM_PER_KEY
+
+// Apply a mod-tap's modifier on key *down*, before the tap/hold decision is
+// made, cancelling it again if the key turns out to be a tap. The decision
+// logic itself is unchanged; this only removes the wait. Every mod here lives
+// on a mod-tap, so without it a mouse chord (Shift+click, Ctrl+click) can't
+// register until the tap-hold settles -- the mod isn't down yet when the click
+// lands. The default policy covers exactly the mod-taps whose mods are Ctrl
+// and/or Shift (both hands), which is the set that gets chorded with the
+// mouse; Alt/GUI mod-taps are left alone, so a stray lone-GUI press can't
+// trigger a start menu.
+#define SPECULATIVE_HOLD
+
+// Don't speculate on a key pressed within this many ms of the previous key --
+// i.e. during the flow of fast typing, where a mod-tap is nearly always a tap
+// and the speculative mod would be a pure round-trip of flashing modifiers.
+// Matches FLOW_TAP_TERM. Flow Tap already covers the alphas (it settles them
+// as taps outright, so no speculation happens there); this extends the same
+// protection to the Shift thumbs, whose tap keycodes (Bspc/Del) aren't in
+// is_flow_tap_key()'s set. A mouse chord is unaffected: reaching for the mouse
+// means the mod key is pressed well outside this window.
+#define SPECULATIVE_HOLD_FLOW_TERM 150
