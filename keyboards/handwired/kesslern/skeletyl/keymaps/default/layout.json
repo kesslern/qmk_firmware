@@ -89,12 +89,12 @@
       "x": 3.5,
       "t": "#000000\n#c100ff\n#008000\n\n#008ff7"
     },
-    "E\nALT\n(\n\nALT",
+    "E\nALT\n(\n\nNAV",
     {
       "x": 8.5,
       "t": "#000000\n#c100ff\n#008000\n\n#008ff7"
     },
-    "T\n<i class='fa fa-long-arrow-down'></i>\n}\n\nALT"
+    "T\n<i class='fa fa-long-arrow-down'></i>\n}\n\nNAV"
   ],
   [
     {
@@ -107,7 +107,7 @@
       "x": 1,
       "t": "#000000\n#c100ff\n#008000\n\n#008ff7"
     },
-    "U\nCTRL\n)\n\nCTRL"
+    "U\nCTRL\n)\n\nSHIFT"
   ],
   [
     {
@@ -115,7 +115,7 @@
       "x": 12,
       "t": "#000000\n#c100ff\n#008000\n\n#008ff7"
     },
-    "H\n<i class='fa fa-long-arrow-left'></i>\n{\n\nCTRL",
+    "H\n<i class='fa fa-long-arrow-left'></i>\n{\n\nSHIFT",
     {
       "x": 1,
       "t": "#000000\n#c100ff\n#008000\n\n#008ff7"
@@ -254,12 +254,12 @@
       "a": 7,
       "f": 3
     },
-    "⌫\n\nDEL\n\nSHIFT",
+    "⌫\n\nDEL\n\nCTRL",
     {
       "t": "#000000\n\n\n\n#008000",
       "f": 3
     },
-    "TAB\n\n\n\nSYM",
+    "TAB\n\n\n\nALT",
     {
       "t": "#000000\n\n\n\n#c100ff",
       "a": 4,
@@ -289,6 +289,6 @@
       "t": "#000000\n\n\n\n#008ff7",
       "f": 3
     },
-    "SPC\n\n\n\nSHIFT"
+    "SPC\n\n\n\nCTRL"
   ]
 ]

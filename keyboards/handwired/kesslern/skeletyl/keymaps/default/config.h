@@ -35,7 +35,7 @@
 // Chordal Hold's same-hand/cross-hand heuristic. By default this only covers
 // alpha keys, comma/dot/semicolon/slash, and space (see is_flow_tap_key() in
 // action_tapping.c), which lines up with the home row mods (all letters
-// underneath the Dvorak remap) and SPC_SFT -- it leaves the SYM/NAV thumb
+// underneath the Dvorak remap) and SPC_CTL -- it leaves the SYM/NAV thumb
 // keys alone since their tap keycodes (Del/Tab/Esc/Enter) aren't in that set.
 #define FLOW_TAP_TERM 150
 
@@ -65,7 +65,7 @@
 // and the speculative mod would be a pure round-trip of flashing modifiers.
 // Matches FLOW_TAP_TERM. Flow Tap already covers the alphas (it settles them
 // as taps outright, so no speculation happens there); this extends the same
-// protection to the Shift thumbs, whose tap keycodes (Bspc/Del) aren't in
+// protection to the Ctrl thumbs, whose tap keycodes (Bspc/Del) aren't in
 // is_flow_tap_key()'s set. A mouse chord is unaffected: reaching for the mouse
 // means the mod key is pressed well outside this window.
 #define SPECULATIVE_HOLD_FLOW_TERM 150

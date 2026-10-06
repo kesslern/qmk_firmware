@@ -68,12 +68,12 @@
       "x": 3.5,
       "t": "#000000\n\n\n\n#008ff7"
     },
-    "E\n\n\n\nALT",
+    "E\n\n\n\nNAV",
     {
       "x": 8.5,
       "t": "#000000\n\n\n\n#008ff7"
     },
-    "T\n\n\n\nALT"
+    "T\n\n\n\nNAV"
   ],
   [
     {
@@ -86,7 +86,7 @@
       "x": 1,
       "t": "#000000\n\n\n\n#008ff7"
     },
-    "U\n\n\n\nCTRL"
+    "U\n\n\n\nSHIFT"
   ],
   [
     {
@@ -94,7 +94,7 @@
       "x": 12,
       "t": "#000000\n\n\n\n#008ff7"
     },
-    "H\n\n\n\nCTRL",
+    "H\n\n\n\nSHIFT",
     {
       "x": 1,
       "t": "#000000\n\n\n\n#008ff7"
@@ -200,12 +200,12 @@
       "a": 7,
       "f": 3
     },
-    "⌫\n\n\n\nSHIFT",
+    "⌫\n\n\n\nCTRL",
     {
       "t": "#000000\n\n\n\n#008ff7",
       "f": 3
     },
-    "TAB\n\n\n\nSYM",
+    "TAB\n\n\n\nALT",
     {
       "t": "#000000\n\n\n\n#008ff7",
       "f": 3
@@ -232,6 +232,6 @@
       "t": "#000000\n\n\n\n#008ff7",
       "f": 3
     },
-    "SPC\n\n\n\nSHIFT"
+    "SPC\n\n\n\nCTRL"
   ]
 ]
